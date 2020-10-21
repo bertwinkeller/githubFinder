@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Navbar extends Component {
-    render() {
+const Navbar = props => {
+
         return (
            <nav className="navbar bg-primary">
                <h1>
@@ -10,7 +10,7 @@ class Navbar extends Component {
                </h1>
            </nav>
         )
-    }
+    
 }
 
 export default Navbar
