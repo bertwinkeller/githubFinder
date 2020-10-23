@@ -9,6 +9,10 @@ import About from './components/pages/About.js'
 import User from './components/User.js'
 
 import axios from 'axios'
+
+import GithubState from './context/github/githubState'
+
+
 const App = () => {
 
   const [users, setUsers] = useState([])
@@ -20,7 +24,7 @@ const App = () => {
 
 
 
- const searchUsers = async text => {
+  const searchUsers = async text => {
 
     setLoading(true)
 
@@ -30,7 +34,7 @@ const App = () => {
     setLoading(false)
   }
 
- const getUser = async (username) => {
+  const getUser = async (username) => {
 
     setLoading(true)
 
@@ -44,31 +48,32 @@ const App = () => {
 
 
   //Get User Repos
- const getUserRepos = async (username) => {
+  const getUserRepos = async (username) => {
 
     setLoading(true)
 
 
     const res = await axios.get(`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`)
 
-   setRepos(res.data)
+    setRepos(res.data)
     setLoading(false)
 
   }
 
   //Clear Users
- const clearUsers = () => {
+  const clearUsers = () => {
     setUsers([])
     setLoading(false)
   }
 
   const showAlert = (msg, type) => {
-    setAlert({msg, type})
+    setAlert({ msg, type })
     setTimeout(() => setAlert(null), 3000)
   }
 
-  
-    return (
+
+  return (
+    <GithubState>
       <Router>
         <div className="App">
           <Navbar />
@@ -93,8 +98,9 @@ const App = () => {
           </div>
         </div>
       </Router>
-    );
-  
+    </GithubState>
+  );
+
 
 }
 
