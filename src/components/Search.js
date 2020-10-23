@@ -1,7 +1,7 @@
 import React, { useState , useContext} from 'react'
 import GithubContext from '../context/github/githubContext'
 
-const Search = ({  showClear, clearUsers, setAlert }) => {
+const Search = ({  setAlert }) => {
 
     const githubContext = useContext(GithubContext)
 
@@ -40,7 +40,7 @@ const Search = ({  showClear, clearUsers, setAlert }) => {
                 <input type="submit" name="Search" className="btn btn-dark btn-block" />
 
             </form>
-            {showClear && <button className="btn btn-light btn-block" onClick={clearUsers}>Clear</button>}
+            {githubContext.users.length > 0 && <button className="btn btn-light btn-block" onClick={githubContext.clearUsers}>Clear</button>}
 
         </div>
     )

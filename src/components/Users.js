@@ -7,13 +7,13 @@ const Users = () => {
 
     const githubContext = useContext(GithubContext)
 
-    const { loading, users } = githubContext
-    if (loading) {
+
+    if (githubContext.loading) {
         return <Spinner />
     } else {
         return (
             <div style={userStyle}>
-                {users.map(user => (
+                {githubContext.users.map(user => (
                     <UserItem key={user.id} user={user} />
 
                 ))}
